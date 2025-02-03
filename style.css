@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  touch-action: manipulation;
+}
+
+.container {
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.orb {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, #7f5af0, #2cb67d);
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  transition: transform 0.3s ease-out;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+}
+
+.action-btn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #7f5af0, #2cb67d);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+  filter: brightness(1.2);
+}
+
+.energy-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: rgba(124, 58, 237, 0.8);
+  border-radius: 50%;
+  animation: particle-flow 1s ease-out forwards;
+}
+
+@keyframes particle-flow {
+  to {
+    transform: translate(
+      calc(var(--tx) * 100px),
+      calc(var(--ty) * 100px)
+    );
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .orb {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .action-btn {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}

@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Websim Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Creative Engine Active</h1>
+    <div class="orb" id="mainOrb"></div>
+    <button class="action-btn" id="activateBtn">🌀 Unleash</button>
+  </div>
+
+  <script>
+    const orb = document.getElementById('mainOrb');
+    const btn = document.getElementById('activateBtn');
+    let energyLevel = 0;
+
+    function pulseCreation() {
+      energyLevel += 10;
+      orb.style.transform = `scale(${1 + energyLevel/100})`;
+      
+      if(energyLevel < 100) {
+        requestAnimationFrame(pulseCreation);
+      } else {
+        const particles = 25;
+        for(let i = 0; i < particles; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'energy-particle';
+          particle.style.left = `${50 + Math.cos((i*15)/180*Math.PI)*40}%`;
+          particle.style.top = `${50 + Math.sin((i*15)/180*Math.PI)*40}%`;
+          document.body.appendChild(particle);
+          
+          setTimeout(() => {
+            particle.remove();
+          }, 1000);
+        }
+        energyLevel = 0;
+        orb.style.transform = 'scale(1)';
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      btn.classList.add('active');
+      pulseCreation();
+      setTimeout(() => btn.classList.remove('active'), 200);
+    });
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
